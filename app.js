@@ -1,9 +1,56 @@
-const colors = generateRandomColors(6);
+const titleBackground = document.querySelector("h1");
+const easyBtn = document.getElementById("easy");
+const hardBtn = document.getElementById("hard");
 
+let numColors = 6;
+let colors = generateRandomColors(numColors);
 let squares = document.querySelectorAll(".square");
 let pickedColor = pickColor();
 let colorDisplay = document.getElementById("rgb");
 let alert = document.getElementById('alert');
+let resetButton = document.getElementById("option");
+
+easyBtn.addEventListener("click", function() {
+  hardBtn.classList.remove("selected");
+  easyBtn.classList.add("selected");
+  numColors = 3;
+  colors = generateRandomColors(numColors);
+  pickedColor = pickColor();
+  colorDisplay.textContent = pickedColor;
+
+  for(let i = 0; i < squares.length; i++) {
+    if(colors[i]) {
+      squares[i].style.background = colors[i];
+    } else {
+      squares[i].style.display = "none";
+    }
+  }
+});
+
+hardBtn.addEventListener("click", function() {
+  easyBtn.classList.remove("selected");
+  hardBtn.classList.add("selected");
+  numColors = 6;
+  colors = generateRandomColors(numColors);
+  pickedColor = pickColor()  ;
+  colorDisplay.textContent = pickedColor;
+
+  for(let i = 0; i < squares.length; i++) {
+    squares[i].style.background = colors[i];
+    squares[i].style.display = "block";
+  }
+});
+
+resetButton.addEventListener("click", function() {
+  colors = generateRandomColors(numColors);
+  pickedColor = pickColor();
+  colorDisplay.textContent = pickedColor;
+
+  for(let i = 0; i < squares.length; i++) {
+    squares[i].style.background = colors[i];
+  }
+  titleBackground.style.background = "#232323";
+});
 
 colorDisplay.textContent = pickedColor;
 
@@ -16,6 +63,7 @@ for(let i = 0; i < squares.length; i++) {
     if(clickedColor === pickedColor) {
       alert.textContent = "Correct!";
       changeColors(clickedColor);
+      resetButton.textContent = "Play Again?";
     } else {
       this.style.background = "#232323";
       alert.textContent = "Try Again";
@@ -27,7 +75,6 @@ function changeColors(color) {
   for(let i = 0; i < squares.length; i++) {
     squares[i].style.background = color;
   }
-  const titleBackground = document.querySelector("h1");
   titleBackground.style.background = color;
 }
 
