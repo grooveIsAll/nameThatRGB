@@ -1,6 +1,5 @@
 const titleBackground = document.querySelector("h1");
-const easyBtn = document.getElementById("easy");
-const hardBtn = document.getElementById("hard");
+const modeButtons = document.querySelectorAll(".mode");
 
 let numColors = 6;
 let colors = generateRandomColors(numColors);
@@ -10,48 +9,36 @@ let colorDisplay = document.getElementById("rgb");
 let alert = document.getElementById('alert');
 let resetButton = document.getElementById("option");
 
-easyBtn.addEventListener("click", function() {
-  hardBtn.classList.remove("selected");
-  easyBtn.classList.add("selected");
-  numColors = 3;
+for(let i = 0; i < modeButtons.length; i++) {
+  modeButtons[i].addEventListener("click", function() {
+    modeButtons[0].classList.remove("selected");
+    modeButtons[1].classList.remove("selected");
+    this.classList.add("selected");
+    this.textContent === "Easy" ? numColors = 3 : numColors = 6;
+    reset();
+  });  
+}
+
+function reset() {
   colors = generateRandomColors(numColors);
   pickedColor = pickColor();
   colorDisplay.textContent = pickedColor;
 
   for(let i = 0; i < squares.length; i++) {
     if(colors[i]) {
-      squares[i].style.background = colors[i];
+    squares[i].style.display = "block";
+    squares[i].style.background = colors[i];
     } else {
       squares[i].style.display = "none";
     }
   }
-});
-
-hardBtn.addEventListener("click", function() {
-  easyBtn.classList.remove("selected");
-  hardBtn.classList.add("selected");
-  numColors = 6;
-  colors = generateRandomColors(numColors);
-  pickedColor = pickColor()  ;
-  colorDisplay.textContent = pickedColor;
-
-  for(let i = 0; i < squares.length; i++) {
-    squares[i].style.background = colors[i];
-    squares[i].style.display = "block";
-  }
-});
-
-resetButton.addEventListener("click", function() {
-  colors = generateRandomColors(numColors);
-  pickedColor = pickColor();
-  colorDisplay.textContent = pickedColor;
-
-  for(let i = 0; i < squares.length; i++) {
-    squares[i].style.background = colors[i];
-  }
-  this.textContent = "New Colors";
+  resetButton.textContent = "New Colors";
   titleBackground.style.background = "steelblue";
   alert.textContent = "";
+}
+
+resetButton.addEventListener("click", function() {
+  reset();
 });
 
 colorDisplay.textContent = pickedColor;
