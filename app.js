@@ -2,21 +2,50 @@ const titleBackground = document.querySelector("h1");
 const modeButtons = document.querySelectorAll(".mode");
 
 let numColors = 6;
-let colors = generateRandomColors(numColors);
+let colors = [];
+let pickedColor;
 let squares = document.querySelectorAll(".square");
-let pickedColor = pickColor();
 let colorDisplay = document.getElementById("rgb");
 let alert = document.getElementById('alert');
 let resetButton = document.getElementById("option");
 
-for(let i = 0; i < modeButtons.length; i++) {
-  modeButtons[i].addEventListener("click", function() {
-    modeButtons[0].classList.remove("selected");
-    modeButtons[1].classList.remove("selected");
-    this.classList.add("selected");
-    this.textContent === "Easy" ? numColors = 3 : numColors = 6;
-    reset();
-  });  
+init();
+
+function init() {
+  setupModeButtons();
+  setupSquares();
+  reset();
+}
+
+function setupModeButtons() {
+  // run modeButton Listeners
+  for(let i = 0; i < modeButtons.length; i++) {
+    modeButtons[i].addEventListener("click", function() {
+      modeButtons[0].classList.remove("selected");
+      modeButtons[1].classList.remove("selected");
+      this.classList.add("selected");
+      this.textContent === "Easy" ? numColors = 3 : numColors = 6;
+      reset();
+    });  
+  }
+}
+
+function setupSquares() {
+  // setup squares
+  for(let i = 0; i < squares.length; i++) {
+    // add 'click' listeners to squares
+    squares[i].addEventListener("click", function() {
+      const clickedColor = this.style.background;
+      if(clickedColor === pickedColor) {
+        alert.textContent = "Correct!";
+        changeColors(clickedColor);
+        resetButton.textContent = "Play Again?";
+      } else {
+        this.style.background = "#232323";
+        alert.textContent = "Try Again";
+      }
+    });
+  }
 }
 
 function reset() {
@@ -40,25 +69,6 @@ function reset() {
 resetButton.addEventListener("click", function() {
   reset();
 });
-
-colorDisplay.textContent = pickedColor;
-
-for(let i = 0; i < squares.length; i++) {
-  // add colors to squares
-  squares[i].style.background = colors[i];
-  // add 'click' listeners to squares
-  squares[i].addEventListener("click", function() {
-    const clickedColor = this.style.background;
-    if(clickedColor === pickedColor) {
-      alert.textContent = "Correct!";
-      changeColors(clickedColor);
-      resetButton.textContent = "Play Again?";
-    } else {
-      this.style.background = "#232323";
-      alert.textContent = "Try Again";
-    }
-  });
-}
 
 function changeColors(color) {
   for(let i = 0; i < squares.length; i++) {
