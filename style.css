@@ -1,10 +1,16 @@
 body {
   background: #232323;
+  margin: 0;
+  font-family: "Avenir", "Montserrat";
 }
 
 h1 {
+  font-weight: normal;
+  text-transform: uppercase;
   color: white;
   text-align: center;
+  background: steelblue;
+  margin: 0;
 }
 
 #choices {
@@ -40,9 +46,41 @@ h1 {
        1px 1px 0 #000;
 }
 
+#rgb {
+  font-size: 2em;
+}
+
+#alert {
+  width: 20%;
+  display: inline-block;
+  font-size: 1.1em;
+  font-weight: 647;
+}
+
 #container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 3% auto;
+}
+
+button {
+  border: none;
+  font-family: font-family: "Avenir", "Montserrat";
+  background: none;
+  text-transform: uppercase;
+  height: 100%;
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;
+  font-size: inherit;
+  transition: all .47s;
+  -webkit-transition: all .47s;
+  -moz-transition: all .47s;
+  outline: none;
+}
+
+button:hover, .selected {
+  background: steelblue;
+  color: white;
 }
 
 .square {
@@ -51,9 +89,8 @@ h1 {
   padding-bottom: 30%;
   float: left;
   margin: 1.66%;
-  border-radius: 5%;
-}
-
-.selected {
-  background: blue;
+  border-radius: 13%;
+  transition: background .47s;
+  -webkit-transition: background .47s;
+  -moz-transition: background .47s;
 }

@@ -49,7 +49,9 @@ resetButton.addEventListener("click", function() {
   for(let i = 0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
   }
-  titleBackground.style.background = "#232323";
+  this.textContent = "New Colors";
+  titleBackground.style.background = "steelblue";
+  alert.textContent = "";
 });
 
 colorDisplay.textContent = pickedColor;
