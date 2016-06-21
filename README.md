@@ -1,10 +1,10 @@
 # Name That RGB Color
 
 
-##A game to brush up on you RGB skills built using HTML/CSS and Vanilla Javascript!##
+###A game to brush up on you RGB skills built using HTML/CSS and Vanilla Javascript!###
 
-###Clone the repo in your terminal or download the zip file.###
-###Open up the index.html page in your browser and start playing!###
+####Clone the repo in your terminal or download the zip file.####
+####Open up the index.html page in your browser and start playing!####
 
 ####Object of the game:####
 
